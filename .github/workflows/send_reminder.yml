@@ -2,10 +2,8 @@ name: Send WhatsApp Reminder
 
 on:
   schedule:
-    # Runs every Monday at 9:00 AM UTC (adjust to your timezone)
-    # UTC+8 (Malaysia/Singapore): 9:00 AM UTC = 5:00 PM local
-    # Use https://crontab.guru to build your own schedule
-    - cron: '0 9 * * 1'
+    # Every Wednesday at 19:30 UTC = 19:30 GMT (winter) / 20:30 BST (summer)
+    - cron: '30 19 * * 3'
   workflow_dispatch: # Allows manual trigger from GitHub UI (useful for testing)
 
 jobs:
