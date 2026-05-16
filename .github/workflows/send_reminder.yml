@@ -1,0 +1,33 @@
+name: Send WhatsApp Reminder
+
+on:
+  schedule:
+    # Runs every Monday at 9:00 AM UTC (adjust to your timezone)
+    # UTC+8 (Malaysia/Singapore): 9:00 AM UTC = 5:00 PM local
+    # Use https://crontab.guru to build your own schedule
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allows manual trigger from GitHub UI (useful for testing)
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Send WhatsApp reminder
+        env:
+          GREEN_API_INSTANCE_ID: ${{ secrets.GREEN_API_INSTANCE_ID }}
+          GREEN_API_TOKEN: ${{ secrets.GREEN_API_TOKEN }}
+          WHATSAPP_GROUP_CHAT_ID: ${{ secrets.WHATSAPP_GROUP_CHAT_ID }}
+          REMINDER_MESSAGE: ${{ secrets.REMINDER_MESSAGE }}
+        run: python send_reminder.py
