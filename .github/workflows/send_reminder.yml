@@ -3,7 +3,7 @@ name: Send WhatsApp Reminder
 on:
   schedule:
     # Every Wednesday at 19:30 UTC = 19:30 GMT (winter) / 20:30 BST (summer)
-    - cron: '30 19 * * 3'
+    - cron: '30 18 * * 3'
   workflow_dispatch: # Allows manual trigger from GitHub UI (useful for testing)
 
 jobs:
